@@ -13,7 +13,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "Name of the key pair"
   type        = string
-  default     = "aws-ec2-access"
+  default     = "ec2-ssh-key"
 }
 
 variable "amazon_linux_host_count" {
