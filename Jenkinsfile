@@ -43,5 +43,11 @@ pipeline {
             }
         }
     }
+     post { 
+        always { 
+            sh 'cd infra-using-terraform; terraform destroy --auto-approve'
+            cleanWs()
+        }
+    }
 }
 
