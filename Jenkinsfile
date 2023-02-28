@@ -32,6 +32,11 @@ pipeline {
                 sh "git push https://${GITHUB_CRED_USR}:${GITHUB_CRED_PSW}@github.com/${GITHUB_CRED_USR}/terraform-ansible-jenkins.git HEAD:main"
             }
         }
+         stage('Commit static inventory file into github') {
+            steps {
+                ansiblePlaybook credentialsId: 'ec2-ssh-key', installation: 'ansible', inventory: 'static_inventory', playbook: 'docker_installation_playbook.yaml'
+            }
+        }
          stage('Procced to destroy the infra ?') {
             steps {
                 input message: 'Destroy aws resources?'
@@ -46,6 +51,10 @@ pipeline {
      post { 
         always { 
             sh 'cd infra-using-terraform; terraform destroy --auto-approve'
+            sh "rm -rf staic_inventory"
+            sh "git add ."
+            sh "git commit -m 'staic_inventory file removed by Jenkins pipeline'"
+            sh "git push https://${GITHUB_CRED_USR}:${GITHUB_CRED_PSW}@github.com/${GITHUB_CRED_USR}/terraform-ansible-jenkins.git HEAD:main"
             cleanWs()
         }
     }
