@@ -86,7 +86,7 @@ resource "aws_instance" "ubuntu_host" {
   count                  = var.ubuntu_host_count
   ami                    = data.aws_ami.ubuntu_ami.id
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.aws_ec2_access_key.id
+  key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.public_sg.id]
 
   tags = {
