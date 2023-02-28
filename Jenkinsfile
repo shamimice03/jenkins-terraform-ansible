@@ -24,9 +24,10 @@ pipeline {
         }
          stage('Commit static inventory file into github') {
             steps {
+                sh "git switch main"
+                sh "git pull origin main"
                 sh "git config user.email shamimice03@gmail.com"
                 sh "git config user.name shamim"
-                sh "git switch main"
                 sh "git add ."
                 sh "git commit -m 'staic_inventory file added by Jenkins pipeline'"
                 sh "git push https://${GITHUB_CRED_USR}:${GITHUB_CRED_PSW}@github.com/${GITHUB_CRED_USR}/terraform-ansible-jenkins.git HEAD:main"
