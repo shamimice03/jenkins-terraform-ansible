@@ -1,0 +1,9 @@
+- hosts: amazon_linux
+  tasks:
+   - name: ping
+     ping:
+     
+- hosts: ubuntu
+  tasks:
+   - name: ping
+     ping:
