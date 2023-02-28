@@ -14,6 +14,9 @@ pipeline {
         stage('Infra provisioning...') {
             steps {
                 sh """
+                    git switch main
+                    git config pull.rebase true
+                    git pull origin main
                     cd infra-using-terraform
                     terraform init
                     terraform plan
@@ -24,9 +27,7 @@ pipeline {
         }
          stage('Commit static inventory file into github') {
             steps {
-                sh "git switch main"
-                sh "git config pull.rebase true"
-                sh "git pull origin main"
+                sh "git status"
                 sh "git config user.email shamimice03@gmail.com"
                 sh "git config user.name shamim"
                 sh "git add ."
