@@ -45,33 +45,33 @@ resource "null_resource" "clean_up" {
 }
 
 
-################## SSH key generation ################## 
-resource "tls_private_key" "ssh" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
+# ################## SSH key generation ################## 
+# resource "tls_private_key" "ssh" {
+#   algorithm = "RSA"
+#   rsa_bits  = 4096
+# }
 
 
-################## Extracting private key ################## 
-resource "local_file" "private_key" {
-  content         = tls_private_key.ssh.private_key_pem
-  filename        = var.private_key_location
-  file_permission = "0400"
-}
+# ################## Extracting private key ################## 
+# resource "local_file" "private_key" {
+#   content         = tls_private_key.ssh.private_key_pem
+#   filename        = var.private_key_location
+#   file_permission = "0400"
+# }
 
 
-################## Create AWS key pair ################## 
-resource "aws_key_pair" "aws_ec2_access_key" {
-  key_name_prefix   = var.key_name
-  public_key = tls_private_key.ssh.public_key_openssh
-}
+# ################## Create AWS key pair ################## 
+# resource "aws_key_pair" "aws_ec2_access_key" {
+#   key_name_prefix   = var.key_name
+#   public_key = tls_private_key.ssh.public_key_openssh
+# }
 
 ################## Create AWS EC2 Instance with "Amozon linux" AMI ################## 
 resource "aws_instance" "amazon_linux_host" {
   count                  = var.amazon_linux_host_count
   ami                    = data.aws_ami.amazon_linux_ami.id
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.aws_ec2_access_key.id
+  key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.public_sg.id]
 
   tags = {
