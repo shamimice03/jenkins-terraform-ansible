@@ -7,15 +7,13 @@ pipeline {
         stage('Cloning') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shamimice03/terraform-ansible-jenkins.git']])
-                sh 'ls -la'
-                sh 'pwd'
+                git "config pull.rebase true"
+                git "pull origin main"
             }
         }
         stage('Infra provisioning...') {
             steps {
                 sh """
-                    git config pull.rebase true
-                    git pull origin main
                     cd infra-using-terraform
                     terraform init
                     terraform plan
