@@ -34,8 +34,7 @@ pipeline {
         }
          stage('Ansible to install docker') {
             steps {
-                ansiblePlaybook credentialsId: 'ec2-ssh-key', installation: 'ansible', inventory: 'static_inventory', playbook: 'docker_installation_playbook.yaml'
-            }
+                ansiblePlaybook credentialsId: 'ec2-ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'static_inventory', playbook: 'docker_installation_playbook.yaml'            }
         }
          stage('Procced to destroy the infra ?') {
             steps {
