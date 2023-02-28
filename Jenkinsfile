@@ -11,7 +11,7 @@ pipeline {
                 git "pull origin main"
             }
         }
-        stage('Infra provisioning...') {
+        stage('Infra provisioning') {
             steps {
                 sh """
                     cd infra-using-terraform
@@ -19,10 +19,9 @@ pipeline {
                     terraform plan
                     terraform apply --auto-approve
                 """
-                sh 'pwd'
             }
         }
-         stage('Commit static inventory file into github') {
+         stage('Commit static_inventory file into github') {
             steps {
                 sh "git status"
                 sh "git config user.email shamimice03@gmail.com"
@@ -32,7 +31,7 @@ pipeline {
                 sh "git push https://${GITHUB_CRED_USR}:${GITHUB_CRED_PSW}@github.com/${GITHUB_CRED_USR}/terraform-ansible-jenkins.git HEAD:main"
             }
         }
-         stage('Ansible to install docker') {
+         stage('Ansible-Install docker on remote hosts') {
             steps {
                 ansiblePlaybook credentialsId: 'ec2-ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'static_inventory', playbook: 'docker_installation_playbook.yaml'            }
         }
@@ -41,7 +40,7 @@ pipeline {
                 input message: 'Destroy aws resources?'
             }
         }
-        stage('Destroying...') {
+        stage('Destroying') {
             steps {
                 sh 'cd infra-using-terraform; terraform destroy --auto-approve'
             }
