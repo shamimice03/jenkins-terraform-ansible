@@ -62,7 +62,7 @@ resource "local_file" "private_key" {
 
 ################## Create AWS key pair ################## 
 resource "aws_key_pair" "aws_ec2_access_key" {
-  key_name   = var.key_name
+  key_name_prefix   = var.key_name
   public_key = tls_private_key.ssh.public_key_openssh
 }
 
