@@ -14,7 +14,6 @@ pipeline {
         stage('Infra provisioning...') {
             steps {
                 sh """
-                    git switch main
                     git config pull.rebase true
                     git pull origin main
                     cd infra-using-terraform
