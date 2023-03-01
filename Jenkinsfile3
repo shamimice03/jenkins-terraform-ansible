@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'aws'}
     environment{
         GITHUB_CRED = credentials('github')
     }
@@ -10,7 +10,6 @@ pipeline {
             }
         }
          stage('Ansible-Install docker on remote hosts') {
-            agent {label 'aws'}
             steps {
                 ansiblePlaybook credentialsId: 'ec2-ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'static_inventory', playbook: 'docker_installation_playbook.yaml'            }
         }
