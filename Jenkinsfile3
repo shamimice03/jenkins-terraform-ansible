@@ -4,14 +4,12 @@ pipeline {
         GITHUB_CRED = credentials('github')
     }
     stages {
-        stage('Cloning') {
-            steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shamimice03/terraform-ansible-jenkins.git']])
-            }
-        }
          stage('Ansible-Install docker on remote hosts') {
             steps {
-                sh 'pwd'
-                sh 'whereis ansible'
+                 sh 'pwd'
+                 sh 'whereis ansible'
+                }
+        }
     }
+}
 
