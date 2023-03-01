@@ -9,7 +9,7 @@ pipeline {
                  sh 'pwd'
                  sh 'whereis ansible'
                  sh 'ls -la'
-                 sh 'ansible-playbook docker_install_on_ubuntu.yaml'
+                 ansiblePlaybook credentialsId: 'ec2-ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'static_inventory', playbook: 'docker_installation_playbook.yaml'
                 }
         }
     }
