@@ -1,12 +1,11 @@
 ### Use the `terraform.tfvars` file to set variables as per your needs
 
 ```
-project_name            = "Ansible-Dynamic-Inventory"
+project_name            = "jenkins-terraform-ansible"
 instance_type           = "t2.micro"
-key_name                = "aws-ec2-access"
-amazon_linux_host_count = 2
-ubuntu_host_count       = 2
-private_key_location    = "/home/ec2-user/.ssh/aws-ec2-access.pem"
+key_name                = "ec2-ssh-key"
+amazon_linux_host_count = 1
+ubuntu_host_count       = 1
 sg_ports = [
   {
     "port" : 22,
@@ -25,7 +24,6 @@ sg_ports = [
     "protocol" : "tcp"
   }
 ]
-
 ```
 
 ### Run following commands to deploy Instances on aws
