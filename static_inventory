@@ -1,0 +1,10 @@
+[amazon_linux]
+18.183.24.137
+
+[ubuntu]
+43.207.217.6
+
+[linux:children]
+amazon_linux
+ubuntu
+
