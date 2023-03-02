@@ -6,7 +6,7 @@ Creating a `Jenkins` Pipeline which will provision several `EC2` instances using
 2. Two Jenkins Agent (slaves)
    - Must have  `git`, `terraform`, and `ansible` installed
    - Must have appropriate `IAM instance profile` attached
-3. Jenkins pipeline
+3. Jenkins pipeline job
 
 
 ### What we have on this `Repo`:
