@@ -17,5 +17,3 @@ Creating a `Jenkins` Pipeline which will provision several `EC2` instances using
    - `docker_installation_playbook.yaml` for calling appropriate `playbook` as per linux distro.
 3. `Jenkinsfile` which will be used to configure Jenkins pipeline job.
 
-### What We need to do:
-
