@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'aws'}
+    agent {label 'common'}
     environment{
         GITHUB_CRED = credentials('github')
     }
