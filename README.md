@@ -1,11 +1,21 @@
-# terraform-ansible-jenkins
+### Our Goal is: 
+Creating a `Jenkins` Pipeline which will provision several `EC2` instances using `terraform` and then installing `Docker` on the `EC2` instances using `Ansible`
 
-### Our Goal is: Creating a `Jenkins` Pipeline which will provision several `EC2` instances using `terraform` and then installing `Docker` on the `EC2` instances using `Ansible`
+### What we need:
+1. Jenkins master server on aws 
+2. Two Jenkins Agent (slaves)
+   - Must have  `git`, `terraform`, and `ansible` installed
+   - Must have appropriate `IAM instance profile` attached
+4. Jenkins pipeline with `Jenkinsfile`
 
-Our goal is to clone this repository first and the under the `infra-using-terraform` folder we have `terraform` code, which will provision multiple EC2 instances on `AWS`.
-`EC2` instances will be provisioned from ubuntu AMI and Amazon linux AMI. Which represents different linux distribution. After provisiong instances, `terraform` 
-code will create a `static_inventory` file. Which will help us to run `Ansible-Playbook` on remote hosts.
+### What we have on this `Repo`:
+1. Terraform: Under the `infra-using-terraform` folder we have `terraform` code, which will provision multiple EC2 instances on `AWS`.
+`EC2` instances will be provisioned from ubuntu AMI and Amazon linux AMI. Which represents different linux distribution.
+2. Ansible playbook: We have `three` ansible-playbook. 
+   - `docker_install_on_ubuntu.yaml`
+   - `docker_install_on_amazon_linux.yaml`
+   - `docker_installation_playbook.yaml` for calling appropriate `playbook` as per linux distro.
+3. `Jenkinsfile` which will be used to configure Jenkins pipeline job.
 
-1. Create an AWS AMI for jenkins agent where all the necessary packages will be pre-installed. 
-2. Configure `Jenkins-Agents` to run `terraform` and `ansible`
-3. Configure Jenkins pipeline
+### What We need to do:
+
